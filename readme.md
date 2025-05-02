@@ -1,3 +1,36 @@
+# Country Health and Economy Analysis
+
+This repository contains a regression-based analysis of the relationship between economic prosperity (GDP per capita) and population health (life expectancy) across countries over time. The project is organized into: data wrangling, exploratory visualization, modeling, and evaluation.
+
+---
+
+## 📁 Repository Structure
+
+```
+├── data
+│   ├── raw
+│   │   ├── API_NY.GDP.PCAP.CD_...csv   # Raw GDP per capita data
+│   │   └── API_SP.DYN.LE00.IN_...csv   # Raw life expectancy data
+│   └── processed
+│       └── country_health_econ.csv    # Cleaned, merged dataset
+│
+├── notebook
+│   ├── plots.ipynb                    # Jupyter notebook with EDA visualizations
+│   └── notebook.ipynb                 # Additional exploratory notebook
+│
+├── data_wrangling.py                  # Script to load, clean, and merge indicators
+├── modeling.py                        # Script to train and tune regression models
+│
+├── models                             # Saved scaler and model artifacts
+│   ├── scaler.pkl
+│   ├── linear_regression.pkl
+│   ├── random_forest.pkl
+│   ├── gradient_boosting.pkl
+│   ├── svr.pkl
+│   └── voting_regressor.pkl
+│
+└── README.md                          # Project overview and instructions
+```
 
 ---
 
@@ -13,13 +46,13 @@
 
 ### Variables in `country_health_econ.csv`
 
-| Column            | Description                                            |
-|-------------------|--------------------------------------------------------|
-| `Country Name`    | Official country name                                  |
-| `Country Code`    | ISO 3166-1 alpha-3 country code                        |
-| `Year`            | 4-digit calendar year                                  |
-| `GDP_per_capita`  | GDP per person in current US dollars                   |
-| `Life_Expectancy` | Average lifespan in years                              |
+| Column             | Description                                           |
+|--------------------|-------------------------------------------------------|
+| `Country Name`     | Official country name                                 |
+| `Country Code`     | ISO 3166-1 alpha-3 country code                       |
+| `Year`             | 4-digit calendar year                                 |
+| `GDP_per_capita`   | GDP per person in current US dollars                  |
+| `Life_Expectancy`  | Average lifespan in years                             |
 
 After cleaning:  
 - `GDP_per_capita_log` is computed as `log1p(GDP_per_capita)` to reduce skew.  
@@ -34,19 +67,19 @@ After cleaning:
    - One-hot encode `Country Code`  
    - Include `Year` as a feature  
    - Split data into train (80%) and test (20%) sets  
-   - Standardize features  
+   - Standardize features
 
 2. **Models & Tuning:**  
    - Linear Regression  
    - Random Forest (tuned hyperparameters)  
    - Gradient Boosting (tuned hyperparameters)  
    - Support Vector Regressor (tuned hyperparameters)  
-   - Voting Ensemble of all models  
+   - Voting Ensemble of all models
 
 3. **Evaluation Metrics:**  
    - **R² Score**  
    - **MAE** (Mean Absolute Error)  
-   - **MSE** (Mean Squared Error)  
+   - **MSE** (Mean Squared Error)
 
 ---
 
@@ -66,6 +99,23 @@ After cleaning:
 
 ## 🚀 How to Run
 
-1. **Data Wrangling:**  
+1. **Data Wrangling:**
+
    ```bash
+   # Always show details
    python data_wrangling.py
+   ```
+
+2. **Visualization:**
+
+   ```bash
+   # Always show details
+   jupyter notebook notebook/plots.ipynb
+   ```
+
+3. **Modeling:**
+
+   ```bash
+   # Always show details
+   python modeling.py
+   ```
