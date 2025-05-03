@@ -97,7 +97,7 @@ After cleaning:
 | SVR                 | 0.7754   | 1.216 | 05.739 |
 | Voting Ensemble     | 0.9472   | 1.798 | 06.482 |
 
-*Insight:* The ensemble achieves the best performance (R² ≈ 0.68).
+*Insight:* The Random Forest achieves the best performance (R² ≈ 0.98).
 
 ---
 
