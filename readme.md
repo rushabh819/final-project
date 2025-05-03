@@ -2,6 +2,8 @@
 
 This repository contains a regression-based analysis of the relationship between economic prosperity (GDP per capita) and population health (life expectancy) across countries over time. The project is organized into: data wrangling, exploratory visualization, modeling, and evaluation.
 
+A data-driven study that cleans and merges World Bank GDP per capita and life expectancy data, explores key trends through visualizations, and builds regression models (Linear, Random Forest, Gradient Boosting, SVR, and ensemble) to predict life expectancy from economic and temporal features.
+
 ---
 
 ## 📁 Repository Structure
@@ -29,6 +31,8 @@ This repository contains a regression-based analysis of the relationship between
 │   ├── svr.pkl
 │   └── voting_regressor.pkl
 │
+├── requirements.txt
+|
 └── README.md                          # Project overview and instructions
 ```
 
