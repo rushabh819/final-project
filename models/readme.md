@@ -1,37 +1,48 @@
 # Models Directory
 
-This folder contains serialized model artifacts and the scaler used in the Country Health and Economy Analysis project.
+This directory contains serialized model artifacts and the scaler produced by the modeling pipeline for the Country Health and Economy Analysis project.
 
-## File Descriptions
+## Contents
 
-| Filename                          | Description                                                                                                                                       |
-|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `scaler.pkl`                      | A `StandardScaler` fitted on the training set features (`GDP_per_capita_log`, `Year`, and one-hot country codes). Use this to scale new inputs. |
-| `linear_regression.pkl`           | Baseline `LinearRegression` model capturing the average linear relationship between GDP and life expectancy.                                        |
-| `random_forest_optimized.pkl`     | `RandomForestRegressor` with tuned hyperparameters (`n_estimators`, `max_depth`, `max_features`), excellent at modeling non-linear effects.      |
-| `gradient_boosting_optimized.pkl` | `GradientBoostingRegressor` with tuned hyperparameters (`n_estimators`, `learning_rate`, `max_depth`), sequentially corrects previous errors.     |
-| `svr_optimized.pkl`               | `SVR` (Support Vector Regression) with RBF kernel and optimized `C` and `gamma`, robust to outliers and useful for small-to-medium datasets.     |
-| `voting_regressor.pkl`            | `VotingRegressor` ensemble that averages predictions from Linear, Random Forest, Gradient Boosting, and SVR for balanced performance.             |
+| File                            | Description                                                                                                       |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `scaler.pkl`                    | A `StandardScaler` object fitted on training features (`GDP_per_capita_log`, `Year`, and one-hot country codes`). |
+| `linear_regression.pkl`         | Baseline `LinearRegression` model capturing the linear relationship between GDP per capita and life expectancy.   |
+| `random_forest_optimized.pkl`   | `RandomForestRegressor` with tuned hyperparameters, adept at modeling non-linear trends and interactions.         |
+| `gradient_boosting_optimized.pkl` | `GradientBoostingRegressor` with optimized parameters for sequential error correction and robust predictions.    |
+| `svr_optimized.pkl`             | `SVR` (Support Vector Regression) with RBF kernel and tuned `C`/`gamma`, suited for complex, small-to-medium data. |
+| `voting_regressor.pkl`          | `VotingRegressor` ensemble combining Linear, RF, GB, and SVR models for balanced performance.                      |
 
 ## Usage
 
-Load the scaler and any model using `joblib`:
+Load the scaler and a model using `joblib`:
 
 ```python
 import joblib
+import pandas as pd
+import numpy as np
 
-# Load scaler
+# Load artifacts
 dirs = 'models'
 scaler = joblib.load(f'{dirs}/scaler.pkl')
+rf = joblib.load(f'{dirs}/random_forest_optimized.pkl')
 
-# Load a model (e.g., Random Forest)
-rf_model = joblib.load(f'{dirs}/random_forest_optimized.pkl')
+# Example new data
+data = pd.DataFrame({
+    'GDP_per_capita': [10000],
+    'Year': [2020],
+    'Country Code': ['USA']
+})
 
-# Prepare new data
-# - Compute log: data['GDP_per_capita_log'] = np.log1p(data['GDP_per_capita'])
-# - Include Year and one-hot encode Country Code
-# - Create DataFrame X_new with same columns used in training
+# Preprocess: log-transform
+data['GDP_per_capita_log'] = np.log1p(data['GDP_per_capita'])
 
+# One-hot encode Country Code to match training features
+# e.g., X_new = pd.get_dummies(data[['GDP_per_capita_log','Year','Country Code']], prefix='CC')
+
+# Align columns, then scale
+X_new = X_new.reindex(columns=feature_columns, fill_value=0)
 X_scaled = scaler.transform(X_new)
-y_pred = rf_model.predict(X_scaled)
 
+# Predict
+y_pred = rf.predict(X_scaled)
