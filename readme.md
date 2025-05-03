@@ -17,8 +17,7 @@ A data-driven study that cleans and merges World Bank GDP per capita and life ex
 │       └── country_health_econ.csv    # Cleaned, merged dataset
 │
 ├── notebook
-│   ├── plots.ipynb                    # Jupyter notebook with EDA visualizations
-│   └── notebook.ipynb                 # Additional exploratory notebook
+│   └── plots.ipynb                    # Jupyter notebook with EDA visualizations
 │
 ├── data_wrangling.py                  # Script to load, clean, and merge indicators
 ├── modeling.py                        # Script to train and tune regression models
