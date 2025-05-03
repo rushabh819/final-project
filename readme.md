@@ -91,15 +91,24 @@ After cleaning:
 
 | Model               | R² Score | MAE   | MSE    |
 |---------------------|----------|-------|--------|
-| Linear Regression   | 0.6273   | 4.968 | 45.727 |
-| Random Forest       | 0.6648   | 4.519 | 41.120 |
-| Gradient Boosting   | 0.6672   | 4.516 | 40.830 |
-| SVR                 | 0.6312   | 4.463 | 45.247 |
-| Voting Ensemble     | 0.6800   | 4.504 | 40.729 |
+| Linear Regression   | 0.9029   | 2.414 | 11.916 |
+| Random Forest       | 0.9812   | 0.943 | 02.304 |
+| Gradient Boosting   | 0.7754   | 3.998 | 27.552 |
+| SVR                 | 0.7754   | 1.216 | 05.739 |
+| Voting Ensemble     | 0.9472   | 1.798 | 06.482 |
 
 *Insight:* The ensemble achieves the best performance (R² ≈ 0.68).
 
 ---
+
+
+## Requirements
+
+Install the necessary libraries with:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## 🚀 How to Run
 
